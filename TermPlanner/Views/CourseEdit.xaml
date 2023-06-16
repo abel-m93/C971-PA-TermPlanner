@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TermPlanner.Views.CourseEdit"
+             Title="Course Edit">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="WhiteSmoke">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Row 0 ID-->
+                <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course ID:</Label>
+                <Entry Grid.Row="0 " Grid.Column="1" x:Name="CourseId" Text="{Binding Id}" VerticalTextAlignment="Center" IsReadOnly="True"></Entry>
+
+                <!--Row 1 Name-->
+                <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Name:</Label>
+                <Entry x:Name="CourseName" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
+
+                <!--Row 2 Status-->
+                <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Status:</Label>
+                <Picker Grid.Row="2" Grid.Column="1" FontSize="Medium" x:Name="CourseStatusPicker" Title="Select Status" TitleColor="DarkSlateGray">
+                    <Picker.Items>
+                        <x:String>Current</x:String>
+                        <x:String>Passed</x:String>
+                        <x:String>Failed</x:String>
+                        <x:String>Not Started</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <!--Row 3 Start Date-->
+                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Start:</Label>
+                <DatePicker Grid.Row="3" Grid.Column="1" x:Name="CourseStartPicker"></DatePicker>
+
+                <!--Row 4 End Date-->
+                <Label Grid.Row="4" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course End:</Label>
+                <DatePicker Grid.Row="4" Grid.Column="1" x:Name="CourseEndPicker"></DatePicker>
+
+                <!--Row 5 Alerts-->
+                <Label Grid.Row="5" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Alert On?</Label>
+                <Switch Grid.Row="5" Grid.Column="1" x:Name="AlertOn" HorizontalOptions="CenterAndExpand" IsToggled="False"/>
+
+                <Label Grid.Row="6" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Instructor Name:</Label>
+                <Entry x:Name="InstrName" Text="{Binding InstrName}" Grid.Row="6" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
+
+                <Label Grid.Row="7" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Instructor Phone:</Label>
+                <Entry x:Name="InstrPhone" Text="{Binding InstrPhone}" Grid.Row="7" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
+
+                <Label Grid.Row="8" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Instructor Email:</Label>
+                <Entry x:Name="InstrEmail" Text="{Binding InstrEmail}" Grid.Row="8" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
+
+                <Label Grid.Row="9" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Name:</Label>
+                <Editor Grid.Row="9" Grid.Column="1" x:Name="CourseNotes" Text="{}"></Editor>
+
+                <Button Grid.Row="10" Grid.Column="0" WidthRequest="100" Padding="5" Text="Save" x:Name="SaveCourse" TextColor="White" BackgroundColor="Green" HorizontalOptions="StartAndExpand"></Button>
+                <Button Grid.Row="10" Grid.Column="1" WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteCourse" TextColor="White" BackgroundColor="Red" HorizontalOptions="StartAndExpand"></Button>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TermPlanner.Views.AddTerm"
+             Title="Add Term">
+    <NavigationPage.TitleView>
+        <Label Text="Add Term" FontSize="Title" HorizontalOptions="CenterAndExpand"></Label>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Enter Term Details" HorizontalOptions="CenterAndExpand" />
+
+            <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="WhiteSmoke">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Row 1 Name-->
+                <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term Name: </Label>
+                <Entry x:Name="TermName" Placeholder="Enter Term Name" Grid.Row="0 " Grid.Column="1" VerticalTextAlignment="Center"></Entry>
+
+                <!--Row 2 Status-->
+                <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term Status: </Label>
+                <Picker Grid.Row="1" Grid.Column="1" FontSize="Medium" x:Name="TermStatusPicker" Title="Select A Status" TitleColor="DarkSlateGray">
+                    <Picker.Items>
+                        <x:String>Current</x:String>
+                        <x:String>Passed</x:String>
+                        <x:String>Failed</x:String>
+                        <x:String>Not Started</x:String>
+                    </Picker.Items>
+                </Picker>
+                
+                <!--Row 3 Start Date-->
+                <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term Start: </Label>
+                <DatePicker Grid.Row="2" Grid.Column="1" x:Name="TermStartPicker"></DatePicker>
+                
+                <!--Row 4 End Date-->
+                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term End: </Label>
+                <DatePicker Grid.Row="3" Grid.Column="1" x:Name="TermEndPicker"></DatePicker>
+            </Grid>
+
+            <Button Text="Add Term" x:Name="SaveTermBtn" BackgroundColor="DodgerBlue" Clicked="SaveTermBtn_Clicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
