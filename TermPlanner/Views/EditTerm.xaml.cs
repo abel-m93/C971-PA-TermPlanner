@@ -68,9 +68,13 @@ namespace TermPlanner.Views
         async void DeleteTerm_Clicked(object sender, EventArgs e)
         {
             bool confirmDel = await DisplayAlert("Confirm?", "Delete the selected term and its courses?", "Yes", "No");
-
+            var delRelatedCourse = DatabaseServices.GetCourses(SelectedTermId);
             if (confirmDel)
             {
+                foreach (var course in await delRelatedCourse) 
+                {
+                    await DatabaseServices.DeleteCourse(delRelatedCourse.Id);
+                }
                 await DatabaseServices.DeleteTerm(SelectedTermId);
                 await DisplayAlert("Confirmation", "Term Deleted", "OK");
             }

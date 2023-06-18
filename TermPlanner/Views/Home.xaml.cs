@@ -38,6 +38,7 @@ namespace TermPlanner.Views
         {
             await DatabaseServices.ClearSampleData();
             await DisplayAlert("ATTENTION", "Sample Data Cleared", "OK");
+            await Navigation.PopToRootAsync();
         }
 
         //METHOD AND BUTTON FOR TESTING PURPOSES

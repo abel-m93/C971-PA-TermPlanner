@@ -69,8 +69,8 @@
                 <Label Grid.Row="9" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Name:</Label>
                 <Editor Grid.Row="9" Grid.Column="1" x:Name="CourseNotes" Text="{}"></Editor>
 
-                <Button Grid.Row="10" Grid.Column="0" WidthRequest="100" Padding="5" Text="Save" x:Name="SaveCourse" TextColor="White" BackgroundColor="Green" HorizontalOptions="StartAndExpand"></Button>
-                <Button Grid.Row="10" Grid.Column="1" WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteCourse" TextColor="White" BackgroundColor="Red" HorizontalOptions="StartAndExpand"></Button>
+                <Button Grid.Row="10" Grid.Column="0" WidthRequest="100" Padding="5" Text="Save" x:Name="SaveCourse" TextColor="White" BackgroundColor="Green" HorizontalOptions="StartAndExpand" Clicked="SaveCourse_Clicked"></Button>
+                <Button Grid.Row="10" Grid.Column="1" WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteCourse" TextColor="White" BackgroundColor="Red" HorizontalOptions="StartAndExpand" Clicked="DeleteCourse_Clicked"></Button>
 
             </Grid>
         </StackLayout>

@@ -32,7 +32,7 @@ namespace TermPlanner.Views
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(CourseStatusPicker.SelectedItem.ToString()))
+            if (CourseStatusPicker.SelectedItem == null || string.IsNullOrWhiteSpace(CourseStatusPicker.SelectedItem.ToString()))
             {
                 await DisplayAlert("Missing Status", "Please enter a Status", "OK");
                 return;
@@ -48,6 +48,7 @@ namespace TermPlanner.Views
                 CourseStartPicker.Date, CourseEndPicker.Date, AlertOn.IsToggled, InstrName.Text,
                 InstrPhone.Text, InstrEmail.Text, CourseNotes.Text);
 
+            await DisplayAlert("Button Test", "Course Added Successfully", "OK");
             await Navigation.PopAsync();
 
             

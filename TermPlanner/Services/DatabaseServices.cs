@@ -148,12 +148,12 @@ namespace TermPlanner.Services
             return courses;
         }
 
-        public static async Task UpdateCourse(int id, string name, string status, DateTime startDate, DateTime endDate, 
+        public static async Task UpdateCourse(int courseId, string name, string status, DateTime startDate, DateTime endDate, 
             bool alertOn, string instrName, string instrPhone, string instrEmail, string notes)
         {
             await Init();
 
-            var courseQuery = await conn.Table<Course>().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var courseQuery = await conn.Table<Course>().Where(x => x.Id == courseId).FirstOrDefaultAsync();
 
             if (courseQuery != null)
             {
@@ -205,7 +205,9 @@ namespace TermPlanner.Services
             await Init();
 
             await conn.DropTableAsync<Term>();
+            await conn.DropTableAsync<Course>();
             conn = null;
+            
 
         }
     }

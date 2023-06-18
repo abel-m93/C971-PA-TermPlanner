@@ -27,7 +27,7 @@ namespace TermPlanner.Views
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(TermStatusPicker.SelectedItem.ToString()))
+            if (TermStatusPicker.SelectedItem == null || string.IsNullOrWhiteSpace(TermStatusPicker.SelectedItem.ToString()))
             {
                 await DisplayAlert("Missing Status", "Please enter a Status", "OK");
                 return;

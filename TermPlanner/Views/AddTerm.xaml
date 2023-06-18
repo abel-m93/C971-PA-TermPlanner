@@ -29,7 +29,7 @@
 
                 <!--Row 2 Status-->
                 <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term Status: </Label>
-                <Picker Grid.Row="1" Grid.Column="1" FontSize="Medium" x:Name="TermStatusPicker" Title="Select A Status" TitleColor="DarkSlateGray">
+                <Picker Grid.Row="1" Grid.Column="1" FontSize="Medium" x:Name="TermStatusPicker" TitleColor="DarkSlateGray">
                     <Picker.Items>
                         <x:String>Current</x:String>
                         <x:String>Passed</x:String>
