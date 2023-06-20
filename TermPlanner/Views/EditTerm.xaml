@@ -4,7 +4,8 @@
              x:Class="TermPlanner.Views.EditTerm"
              Title="Edit Term">
     <ContentPage.Content>
-        <StackLayout>
+        <ScrollView>
+            <StackLayout>
             
            <!--START TERM FIELDS-->
             <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="WhiteSmoke">
@@ -107,5 +108,6 @@
             </CollectionView>
                             
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -63,7 +63,7 @@
                 <Label Grid.Row="7" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Instructor Email:</Label>
                 <Entry x:Name="InstrEmail" Placeholder="Enter Instructor Email" Grid.Row="7" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
 
-                <Label Grid.Row="8" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Name:</Label>
+                <Label Grid.Row="8" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Notes:</Label>
                 <Editor Grid.Row="8" Grid.Column="1" x:Name="CourseNotes" Placeholder="Enter course notes here..."></Editor>
 
 

@@ -62,9 +62,9 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             
-            <Button Text="Add Term" x:Name="AddTermBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked"></Button>
-            <Button Text="Clear Sample Data" x:Name="ClearDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="ClearDataBtn_Clicked"></Button>
-            <Button Text="Load Sample Data" x:Name="LoadDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="LoadDataBtn_Clicked"></Button>
+            <Button Text="Add Term" x:Name="AddTermBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked" WidthRequest="150"></Button>
+            <Button Text="Clear Sample Data" x:Name="ClearDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="ClearDataBtn_Clicked" WidthRequest="150"></Button>
+            <Button Text="Load Sample Data" x:Name="LoadDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="LoadDataBtn_Clicked" WidthRequest="150"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage> 

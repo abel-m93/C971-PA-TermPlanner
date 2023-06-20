@@ -173,7 +173,75 @@ namespace TermPlanner.Services
 
         }
         #endregion
-        //Load Sample Data ---TERM----
+
+        /*DATABASES SERVICES FOR ASSESSMENTS*/
+
+        #region ASSESSMENT DATABASE SERVICES
+        public static async Task AddAssessment(int courseId, string name, string type, DateTime dueDate, bool alertOn)
+        {
+            await Init();
+
+            Assessment assessment = new Assessment()
+            {
+                CourseId = courseId,
+                Name = name,
+                Type = type,
+                DueDate = dueDate,
+                AlertOn = alertOn
+                
+            };
+
+            await conn.InsertAsync(assessment);
+            int id = assessment.Id;
+        }
+
+        public static async Task UpdateAssessment(int assessmentId, string name, string type, DateTime dueDate, bool alertOn)
+        {
+            await Init();
+
+            var assessQuery = await conn.Table<Assessment>().Where(x => x.Id == assessmentId).FirstOrDefaultAsync();
+
+            if (assessQuery != null)
+            {
+                assessQuery.Name = name;
+                assessQuery.Type = type;
+                assessQuery.DueDate = dueDate;
+                assessQuery.AlertOn = alertOn;
+
+                await conn.UpdateAsync(assessQuery);
+            }
+
+        }
+
+        public static async Task DeleteAssessment(int id)
+        {
+            await Init();
+            await conn.DeleteAsync<Assessment>(id);
+        }
+
+        public static async Task<IEnumerable<Assessment>> GetAssessments(int courseId)
+        {
+            await Init();
+            var assessments = await conn.Table<Assessment>().Where(x => x.CourseId == courseId).ToListAsync();
+            return assessments;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+        #region METHODS FOR SAMPLE DATA
+
 
         public static async void LoadSampleData()
         {
@@ -208,8 +276,9 @@ namespace TermPlanner.Services
             await conn.DropTableAsync<Course>();
             conn = null;
             
-
+            
         }
+        #endregion
     }
 
 }

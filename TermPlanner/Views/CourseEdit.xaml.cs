@@ -37,6 +37,15 @@ namespace TermPlanner.Views
             CourseNotes.Text = course.Notes;
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            //var assessments = await DatabaseServices.GetAssessments(SelectedCourseId);
+            //int courseCount = courses.Count();
+            //courseCountLabel.Text = $"Course Count:\t{courseCount}/0";
+            AssessmentCollectionView.ItemsSource = await DatabaseServices.GetAssessments(SelectedCourseId);
+        }
         async void SaveCourse_Clicked(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(CourseName.Text))
@@ -79,6 +88,11 @@ namespace TermPlanner.Views
             }
 
             await Navigation.PopAsync();
+        }
+
+        async void AddAssessment_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddAssessment(SelectedCourseId));
         }
 
 

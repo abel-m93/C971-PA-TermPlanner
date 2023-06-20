@@ -4,7 +4,8 @@
              x:Class="TermPlanner.Views.CourseEdit"
              Title="Course Edit">
     <ContentPage.Content>
-        <StackLayout>
+        <ScrollView>
+          <StackLayout>
             <Grid Padding="5" RowSpacing="1" ColumnSpacing="1" BackgroundColor="WhiteSmoke">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -66,13 +67,57 @@
                 <Label Grid.Row="8" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Instructor Email:</Label>
                 <Entry x:Name="InstrEmail" Text="{Binding InstrEmail}" Grid.Row="8" Grid.Column="1" VerticalTextAlignment="Center"></Entry>
 
-                <Label Grid.Row="9" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Name:</Label>
-                <Editor Grid.Row="9" Grid.Column="1" x:Name="CourseNotes" Text="{}"></Editor>
+                <Label Grid.Row="9" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Course Notes:</Label>
+                <Editor Grid.Row="9" Grid.Column="1" x:Name="CourseNotes" Text="{Binding Notes}"></Editor>
 
                 <Button Grid.Row="10" Grid.Column="0" WidthRequest="100" Padding="5" Text="Save" x:Name="SaveCourse" TextColor="White" BackgroundColor="Green" HorizontalOptions="StartAndExpand" Clicked="SaveCourse_Clicked"></Button>
                 <Button Grid.Row="10" Grid.Column="1" WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteCourse" TextColor="White" BackgroundColor="Red" HorizontalOptions="StartAndExpand" Clicked="DeleteCourse_Clicked"></Button>
 
-            </Grid>
-        </StackLayout>
+             </Grid>
+                <Button x:Name="AddAssessment" Text="Add Assessment" Clicked="AddAssessment_Clicked"></Button>
+                
+             <Label Text="Assessments" FontSize="Large" Padding="10"></Label>
+
+                <CollectionView x:Name="AssessmentCollectionView"
+                    ItemsSource="{Binding Assessments}"
+                    EmptyView="No Assessments Found"
+                    SelectionMode="Single">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Grid Padding="5" RowSpacing="1" ColumnSpacing="22" BackgroundColor="WhiteSmoke">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Name:</Label>
+                                    <Label Grid.Row="0" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Name}"></Label>
+                                    <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Type:</Label>
+                                    <Label Grid.Row="1" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Type}"></Label>
+
+                                    <!--Term Start and End Dates Displayed-->
+                                    <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Due Date:</Label>
+                                    <Label Grid.Row="2" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding DueDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
+
+                                </Grid>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </StackLayout>
+      </ScrollView>
     </ContentPage.Content>
 </ContentPage>

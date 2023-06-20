@@ -29,7 +29,7 @@ namespace TermPlanner.Views
 
             if (TermStatusPicker.SelectedItem == null || string.IsNullOrWhiteSpace(TermStatusPicker.SelectedItem.ToString()))
             {
-                await DisplayAlert("Missing Status", "Please enter a Status", "OK");
+                await DisplayAlert("Missing Status", "Please select a Status", "OK");
                 return;
             }
 
