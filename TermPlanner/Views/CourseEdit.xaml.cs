@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TermPlanner.Models;
 using TermPlanner.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -76,11 +77,16 @@ namespace TermPlanner.Views
         async void DeleteCourse_Clicked(object sender, EventArgs e)
         {
             bool confirmDel = await DisplayAlert("Confirm?", "Delete the selected course?", "Yes", "No");
-
+            var delRelatedAssessments = await DatabaseServices.GetAssessments(SelectedCourseId);
             if (confirmDel)
             {
+                foreach (var assessment in delRelatedAssessments)
+                {
+                    await DatabaseServices.DeleteAssessment(assessment.Id);
+                }
+                
                 await DatabaseServices.DeleteCourse(SelectedCourseId);
-                await DisplayAlert("Confirmation", "Term Deleted", "OK");
+                await DisplayAlert("Confirmation", "Course Deleted", "OK");
             }
             else
             {
@@ -92,7 +98,50 @@ namespace TermPlanner.Views
 
         async void AddAssessment_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddAssessment(SelectedCourseId));
+            var assessments = await DatabaseServices.GetAssessments(SelectedCourseId);
+            int assessmentCount = assessments.Count();
+
+            if(assessmentCount == 2)
+            {
+                await DisplayAlert("Unable to Complete","Each Course can only have a maximum of 2 Assessments","OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new AddAssessment(SelectedCourseId));
+            }
+            
+        }
+
+        async void AssessmentCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Assessment assessment = (Assessment)e.CurrentSelection.FirstOrDefault();
+
+            if (e.CurrentSelection != null)
+            {
+                await Navigation.PushAsync(new EditAssessment(assessment));
+            }
+        }
+
+        async void ShareText_Clicked(object sender, EventArgs e)
+        {
+            string shareText = CourseNotes.Text;
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = shareText,
+                Title = $"Share Notes for Course {CourseName.Text}"
+            });;
+
+            
+        }
+
+        async void ShareUri_Clicked(object sender, EventArgs e)
+        {
+            string shareText = CourseNotes.Text;
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = shareText,
+                Title = $"Share Notes for Course {CourseName.Text}"
+            });
         }
 
 

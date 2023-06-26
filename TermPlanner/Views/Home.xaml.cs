@@ -7,6 +7,7 @@ using TermPlanner.Services;
 using TermPlanner.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.LocalNotifications;
 
 namespace TermPlanner.Views
 {
@@ -27,11 +28,39 @@ namespace TermPlanner.Views
         protected override async void OnAppearing()
         {   
             base.OnAppearing();
-            //DatabaseServices.LoadSampleData();
+
+            //Populates the Home Screen with existing Terms
             var allTerms = await DatabaseServices.GetTerms();
             TermCollectionView.ItemsSource = allTerms;
 
+            var courseList = await DatabaseServices.GetCourses();
+            var assessmentList = await DatabaseServices.GetAssessments();
 
+            int notificationId = 0;
+
+            foreach (Course course in courseList)
+            {
+                if (course.AlertOn == true)
+                {
+                    if (course.StartDate == DateTime.Today)
+                    {
+                        CrossLocalNotifications.Current.Show("Alert", $"{course.Name} starts today!", notificationId);
+                        notificationId++;
+                    }
+                }
+            }
+
+            foreach (Assessment assessment in assessmentList)
+            {
+                if (assessment.AlertOn == true)
+                {
+                    if (assessment.DueDate == DateTime.Today)
+                    {
+                        CrossLocalNotifications.Current.Show("Alert", $"{assessment.Name} Due today!", notificationId);
+                        notificationId++;
+                    }
+                }
+            }
             //ADD NOTIFICATION FUNCTIONALITY HERE to APPEAR ONCE HOME SCREEN IS ON SCREEN
 
         }
@@ -52,13 +81,22 @@ namespace TermPlanner.Views
         {
             await DatabaseServices.ClearSampleData();
             await DisplayAlert("ATTENTION", "Sample Data Cleared", "OK");
-            await Navigation.PopToRootAsync();
+
+            var allTerms = await DatabaseServices.GetTerms();
+            TermCollectionView.ItemsSource = allTerms;
+
         }
 
         //METHOD AND BUTTON FOR TESTING PURPOSES
         private async void LoadDataBtn_Clicked(object sender, EventArgs e)
         {
+            await DatabaseServices.LoadSampleData();
+            await DisplayAlert("ATTENTION", "Sample Data Loaded", "OK");
+
             var allTerms = await DatabaseServices.GetTerms();
+            TermCollectionView.ItemsSource = allTerms;
+
+
             //Testing if allTerms is Null
             /*            await DisplayAlert("Total Term Count", $"{allTerms.Count()}", "OK");
                         foreach (var term in allTerms)

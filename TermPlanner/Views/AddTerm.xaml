@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TermPlanner.Views.AddTerm"
-             Title="Add Term">
+             x:Class="TermPlanner.Views.AddTerm">
     <NavigationPage.TitleView>
-        <Label Text="Add Term" FontSize="Title" HorizontalOptions="CenterAndExpand"></Label>
+        <Label Text="Add Term" FontSize="Title" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" BackgroundColor="White" TextColor="#003057" FontAttributes="Bold"></Label>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
@@ -47,7 +46,8 @@
                 <DatePicker Grid.Row="3" Grid.Column="1" x:Name="TermEndPicker"></DatePicker>
             </Grid>
 
-            <Button Text="Add Term" x:Name="SaveTermBtn" BackgroundColor="DodgerBlue" Clicked="SaveTermBtn_Clicked"></Button>
+
+            <Button Text="Add Term" x:Name="SaveTermBtn" FontAttributes="Bold" TextColor="White" BackgroundColor="#003057" CornerRadius="10" VerticalOptions="Center" Margin="20,20,20,5" Clicked="SaveTermBtn_Clicked"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

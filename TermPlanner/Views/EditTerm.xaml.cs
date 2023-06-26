@@ -41,7 +41,7 @@ namespace TermPlanner.Views
 
             var courses = await DatabaseServices.GetCourses(SelectedTermId);
             int courseCount = courses.Count();
-            courseCountLabel.Text = $"Course Count:\t{courseCount}/0";
+            courseCountLabel.Text = $"Course Count:\t{courseCount}";
             CourseCollectionView.ItemsSource = await DatabaseServices.GetCourses(SelectedTermId);
         }
 
@@ -68,12 +68,12 @@ namespace TermPlanner.Views
         async void DeleteTerm_Clicked(object sender, EventArgs e)
         {
             bool confirmDel = await DisplayAlert("Confirm?", "Delete the selected term and its courses?", "Yes", "No");
-            var delRelatedCourse = DatabaseServices.GetCourses(SelectedTermId);
+            var delRelatedCourse = await DatabaseServices.GetCourses(SelectedTermId);
             if (confirmDel)
             {
-                foreach (var course in await delRelatedCourse) 
+                foreach (var course in delRelatedCourse) 
                 {
-                    await DatabaseServices.DeleteCourse(delRelatedCourse.Id);
+                    await DatabaseServices.DeleteCourse(course.Id);
                 }
                 await DatabaseServices.DeleteTerm(SelectedTermId);
                 await DisplayAlert("Confirmation", "Term Deleted", "OK");
@@ -91,7 +91,18 @@ namespace TermPlanner.Views
         //This Method will navigate to Add Course Screen. Clicking on ADD COURSE button
         async void AddCourse_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CourseAdd(SelectedTermId));
+            var courses = await DatabaseServices.GetCourses(SelectedTermId);
+            int courseCount = courses.Count();
+
+            if(courseCount == 6)
+            {
+                await DisplayAlert("Too Many Courses", "Each term can only have a maximum of 6 course", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new CourseAdd(SelectedTermId));
+            }
+            
         }
 
         //CLicking on a Course will navigate to EDIT COURSE page.

@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TermPlanner.Views.AddAssessment"
-             Title="Add Assessment">
+             x:Class="TermPlanner.Views.AddAssessment">
+    <NavigationPage.TitleView>
+        <Label Text="Add Assessment" FontSize="Title" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" BackgroundColor="White" TextColor="#003057" FontAttributes="Bold"></Label>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Enter Assessment Details" FontSize="Medium" 
@@ -40,7 +42,7 @@
 
             </Grid>
 
-            <Button Text="Add Assessment" x:Name="AddAssessmentBtn" BackgroundColor="ForestGreen" TextColor="WhiteSmoke" Margin="5" Clicked="AddAssessmentBtn_Clicked"></Button>
+            <Button Text="Add Assessment" x:Name="AddAssessmentBtn" FontAttributes="Bold"  BackgroundColor="#003057" CornerRadius="10" TextColor="White" VerticalOptions="Center" Margin="20,20,20,5"  Clicked="AddAssessmentBtn_Clicked"></Button>
 
         </StackLayout>
     </ContentPage.Content>

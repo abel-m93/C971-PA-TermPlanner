@@ -226,15 +226,13 @@ namespace TermPlanner.Services
             return assessments;
         }
 
+        public static async Task<IEnumerable<Assessment>> GetAssessments()
+        {
+            await Init();
 
-
-
-
-
-
-
-
-
+            var assessments = await conn.Table<Assessment>().ToListAsync();
+            return assessments;
+        }
 
 
 
@@ -243,29 +241,59 @@ namespace TermPlanner.Services
         #region METHODS FOR SAMPLE DATA
 
 
-        public static async void LoadSampleData()
+        public static async Task LoadSampleData()
         {
             await Init();
 
-            Term term1 = new Term
+            Term sampleTerm1 = new Term
             {
                 Name = "Term 1",
                 Status = "Current",
                 StartDate = DateTime.Today.Date,
-                EndDate = DateTime.Today.AddDays(3)
+                EndDate = DateTime.Today.AddMonths(6)
             };
 
-            await conn.InsertAsync(term1);
+            await conn.InsertAsync(sampleTerm1);
 
-            Term term2 = new Term
+            Course sampleCourse1 = new Course
             {
-                Name = "Term 2",
-                Status = "Not Started",
+                TermId = sampleTerm1.Id,
+                Name = "C100 Intro to Humanities",
+                Status = "Passed",
                 StartDate = DateTime.Today.Date,
-                EndDate = DateTime.Today.AddDays(10)
+                EndDate = DateTime.Today.Date.AddDays(15),
+                AlertOn = true,
+                InstrName = "Abel Martinez",
+                InstrPhone = "773-551-3861",
+                InstrEmail = "amar815@wgu.edu",
+                Notes = "Presentation Required"
             };
 
-            await conn.InsertAsync(term2);
+            await conn.InsertAsync(sampleCourse1);
+
+            Assessment sampleAssessment1 = new Assessment
+            {
+                CourseId = sampleCourse1.Id,
+                Name = "Intro to Humanities OA",
+                Type = "Objective",
+                DueDate = DateTime.Today.Date.AddDays(10),
+                AlertOn = true
+            };
+
+            await conn.InsertAsync(sampleAssessment1);
+
+            Assessment sampleAssessment2 = new Assessment
+            {
+                CourseId = sampleCourse1.Id,
+                Name = "Intro to Humanities PA",
+                Type = "Performance",
+                DueDate = DateTime.Today.Date.AddDays(14),
+                AlertOn = true
+            };
+
+            await conn.InsertAsync(sampleAssessment2);
+           
+         
         }
 
         public static async Task ClearSampleData()
@@ -274,7 +302,9 @@ namespace TermPlanner.Services
 
             await conn.DropTableAsync<Term>();
             await conn.DropTableAsync<Course>();
+            await conn.DropTableAsync<Assessment>();
             conn = null;
+
             
             
         }

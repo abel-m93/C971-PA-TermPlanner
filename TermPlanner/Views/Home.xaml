@@ -4,67 +4,95 @@
              x:Class="TermPlanner.Views.Home"
              NavigationPage.HasNavigationBar="False">
     <NavigationPage.TitleView>
-        <Label Text="Home" FontSize="Title" HorizontalOptions="Center"></Label>
+        <Label Text="Home" FontSize="Title" HorizontalOptions="Center" ></Label>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Home" FontSize="36" HorizontalOptions="Center"></Label>
-            <Label Text="Welcome Night Owl" FontSize="Large" HorizontalOptions="CenterAndExpand"/>
-            
+
+        <StackLayout Spacing="0">
+            <Label Text="Term Planner" FontSize="36" HorizontalTextAlignment="Center" HorizontalOptions="Fill" BackgroundColor="#003057" TextColor="White"></Label>
+            <!--<Label Text="Welcome Night Owl" FontSize="Large" HorizontalOptions="CenterAndExpand"/> -->
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Image x:Name="headerImage" Source="owl_Header.jpg" HorizontalOptions="Fill" Aspect="AspectFit"/>
+                <BoxView BackgroundColor="#003057" Opacity="0.375"/>
+                <Label Text="Welcome Night Owl!" FontSize="30" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+
+            </Grid>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Terms" FontSize="30" HorizontalOptions="Start" Padding="10" TextColor="#003057"></Label>
+                <Label Text="Scroll to see more Terms" TextColor="#003057" Padding="10" FontSize="Small" VerticalOptions="Center" FontAttributes="Italic"/>
+            </StackLayout>
+
             <!--Find a way to display TERMS collection view here -->
             <!--Display a message if no terms found ItemsSource="{Binding Term}"-->
 
             <CollectionView x:Name="TermCollectionView"
+                            ItemsUpdatingScrollMode="KeepItemsInView"
+                            VerticalScrollBarVisibility="Always"
                             ItemsSource="{Binding Terms}"
                             EmptyView="No Terms Found"
                             SelectionMode="Single"
                             SelectionChanged="TermCollectionView_SelectionChanged">
 
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
-                
+
                 <!--Define styling of each item-->
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Grid Padding="5" RowSpacing="1" ColumnSpacing="20" BackgroundColor="LightSteelBlue" Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                            <Frame BorderColor="#003057" CornerRadius="10" Margin ="15,0" Padding="0" HasShadow="True">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                                    </Grid.RowDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">ID: </Label>
-                                <Label Grid.Row="0" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Id}"></Label>
-                                <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Name: </Label>
-                                <Label Grid.Row="1" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Name}"></Label>
-                                <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Status: </Label>
-     
-                                <Label Grid.Row="2" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Status}"></Label>
-                                
-                                <!--Term Start and End Dates Displayed-->
-                                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Start Date: </Label>
-                                <Label Grid.Row="3" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding StartDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
-                                <Label Grid.Row="4" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">End Date: </Label>
-                                <Label Grid.Row="4" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding EndDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                            </Grid>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" Grid.ColumnSpan="2" Padding="5" TextColor="White" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Start" BackgroundColor="#003057" HorizontalOptions="FillAndExpand"/>
+
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Status, StringFormat='Status: {0}'}" Padding="5" TextColor="White" FontSize="Large" HorizontalTextAlignment="End" BackgroundColor="#003057" HorizontalOptions="FillAndExpand"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" Padding = "5" VerticalTextAlignment="Center" FontAttributes="Bold">Start Date:</Label>
+                                    <Label Grid.Row="1" Grid.Column="1" FontSize="Medium" Padding = "5" VerticalTextAlignment="Center" Text="{Binding StartDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
+                                    <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" Padding = "5" VerticalTextAlignment="Center" FontAttributes="Bold">End Date:</Label>
+                                    <Label Grid.Row="2" Grid.Column="1" FontSize="Medium" Padding = "5" VerticalTextAlignment="Center" Text="{Binding EndDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
+
+
+                                </Grid>
+                            </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
-            <Button Text="Add Term" x:Name="AddTermBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked" WidthRequest="150"></Button>
-            <Button Text="Clear Sample Data" x:Name="ClearDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="ClearDataBtn_Clicked" WidthRequest="150"></Button>
-            <Button Text="Load Sample Data" x:Name="LoadDataBtn" BackgroundColor="DodgerBlue" HorizontalOptions="CenterAndExpand" Clicked="LoadDataBtn_Clicked" WidthRequest="150"></Button>
+
+        
+            <StackLayout>
+                <Button Text="Add Term" x:Name="AddTermBtn" FontAttributes="Bold" TextColor="White" BackgroundColor="#003057" CornerRadius="10" Clicked="Button_Clicked" VerticalOptions="Center" Margin="20,20,20,5"></Button>
+                <StackLayout Orientation="Horizontal" Margin="20,0,20,10">
+                    <Button Text="Load Sample Data" FontSize="Micro" x:Name="LoadDataBtn" TextColor="#003057" BackgroundColor="WhiteSmoke" BorderColor="#003057" BorderWidth="2" CornerRadius="10" HorizontalOptions="StartAndExpand" Clicked="LoadDataBtn_Clicked"></Button>
+                    <Button Text="Clear Sample Data" FontSize="Micro" x:Name="ClearDataBtn" TextColor="#003057" BackgroundColor="WhiteSmoke" BorderColor ="#003057" BorderWidth="2" CornerRadius="10" HorizontalOptions="EndAndExpand" Clicked="ClearDataBtn_Clicked"></Button>
+                    
+
+                </StackLayout>
+             
+            </StackLayout>
+
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage> 

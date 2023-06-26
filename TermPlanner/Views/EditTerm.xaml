@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TermPlanner.Views.EditTerm"
-             Title="Edit Term">
+             x:Class="TermPlanner.Views.EditTerm">
+    <NavigationPage.TitleView>
+        <Label Text="Edit Term" FontSize="Title" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" BackgroundColor="White" TextColor="#003057" FontAttributes="Bold"></Label>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -50,17 +52,24 @@
                 <Label Grid.Row="4" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Term End:</Label>
                 <DatePicker Grid.Row="4" Grid.Column="1" x:Name="TermEndPicker"></DatePicker>
 
-                <Button Grid.Row="5" Grid.Column="0" WidthRequest="100" Padding="5" Text="Save" x:Name="SaveTerm" TextColor="White" BackgroundColor="Green" HorizontalOptions="StartAndExpand" Clicked="SaveTerm_Clicked"></Button>
-                <Button Grid.Row="5" Grid.Column="1" WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteTerm" TextColor="White" BackgroundColor="Red" HorizontalOptions="StartAndExpand" Clicked="DeleteTerm_Clicked"></Button>
-
             </Grid>
 
-            <!--SAVE AND DELETE BUTTONS-->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Button WidthRequest="100" Padding="5" Text="Save" x:Name="SaveTerm" TextColor="#003057" BackgroundColor="White" BorderColor="#003057" BorderWidth="2" CornerRadius="10" HorizontalOptions="StartAndExpand" Clicked="SaveTerm_Clicked" ></Button>
+                <Button WidthRequest="100" Padding="5" Text="Delete" x:Name="DeleteTerm" TextColor="#003057" BackgroundColor="White" BorderColor="#003057" BorderWidth="2" CornerRadius="10" HorizontalOptions="StartAndExpand" Clicked="DeleteTerm_Clicked" Margin="0,0,10,0"></Button>
+            </StackLayout>
+             
+             <Label Text="__________________________________________________" HorizontalOptions="Center"></Label>
+                <!--SAVE AND DELETE BUTTONS-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Courses" FontSize="30" TextColor="#003057" Padding ="10"/>
+                <Button x:Name="AddCourse" TextColor="White" BackgroundColor="#003057" CornerRadius="10" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Text="Add Course" Margin="0,0,10,0" Clicked="AddCourse_Clicked"></Button>
+
+            </StackLayout>
+ 
+                <!--END TERM FIELDS-->
             
-            <!--END TERM FIELDS-->
-            <Button x:Name="AddCourse" Text="Add Course" Clicked="AddCourse_Clicked"></Button>
-            <Label Text="__________________________________________________" HorizontalOptions="Center"></Label>
-            <Label x:Name="courseCountLabel" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+            <Label x:Name="courseCountLabel" FontSize="Small" Margin="20,0,0,20"></Label>
             <!--START COURSES VIEW -->
             <CollectionView x:Name="CourseCollectionView"
                             ItemsSource="{Binding Courses}"
@@ -74,7 +83,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Grid Padding="5" RowSpacing="1" ColumnSpacing="22" BackgroundColor="WhiteSmoke">
+                          <Frame BorderColor="#003057"  CornerRadius="10" HasShadow="True" Padding="5" Margin="15,0">
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -93,21 +103,24 @@
                                 <Label Grid.Row="1" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Status:</Label>
                                 <Label Grid.Row="1" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding Status}"></Label>
 
-                                <!--Term Start and End Dates Displayed-->
+                                <!--Term Start      and End Dates Displayed-->
                                 <Label Grid.Row="2" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">Start Date:</Label>
                                 <Label Grid.Row="2" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding StartDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
                                 <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center" FontAttributes="Bold">End Date:</Label>
                                 <Label Grid.Row="3" Grid.Column="1" FontSize="Medium" VerticalTextAlignment="Center" Text="{Binding EndDate, StringFormat='{0:M/dd/yyyy}'}"></Label>
 
-                                
+
                             </Grid>
+                          </Frame>
+
+                            
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 
-            </CollectionView>
+               </CollectionView>
                             
-        </StackLayout>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
