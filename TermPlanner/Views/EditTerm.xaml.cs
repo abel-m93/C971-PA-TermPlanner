@@ -59,6 +59,12 @@ namespace TermPlanner.Views
                 return;
             }
 
+            if (TermStartPicker.Date >= TermEndPicker.Date)
+            {
+                await DisplayAlert("Invalid Date", "Please ensure Term Start Date is before Term End Date", "OK");
+                return;
+            }
+
             await DatabaseServices.UpdateTerm(SelectedTermId, TermName.Text, TermStatusPicker.SelectedItem.ToString(),
                                TermStartPicker.Date, TermEndPicker.Date);
             await DisplayAlert("Button Test", "Term Updated Successfully!", "OK");

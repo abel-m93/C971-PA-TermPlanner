@@ -47,8 +47,22 @@ namespace TermPlanner.Views
             //courseCountLabel.Text = $"Course Count:\t{courseCount}/0";
             AssessmentCollectionView.ItemsSource = await DatabaseServices.GetAssessments(SelectedCourseId);
         }
+
+        private bool isInvalidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return !(addr.Address == email);
+            }
+            catch
+            {
+                return true;
+            }
+        }
         async void SaveCourse_Clicked(object sender, EventArgs e)
         {
+            bool emailInvalid = isInvalidEmail(InstrEmail.Text);
             if (string.IsNullOrWhiteSpace(CourseName.Text))
             {
                 await DisplayAlert("Incomplete Data", "Please enter a name", "OK");
@@ -61,9 +75,27 @@ namespace TermPlanner.Views
                 return;
             }
 
+            if (CourseStartPicker.Date >= CourseEndPicker.Date)
+            {
+                await DisplayAlert("Invalid Date", "Please ensure Course Start Date is before Course End Date", "OK");
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(InstrName.Text))
             {
                 await DisplayAlert("Incomplete Data", "Please enter Instructor name", "OK");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(InstrPhone.Text))
+            {
+                await DisplayAlert("Incomplete Data", "Please enter valid instructor phone number", "OK");
+                return;
+            }
+
+            if (emailInvalid || string.IsNullOrWhiteSpace(InstrEmail.Text))
+            {
+                await DisplayAlert("Incomplete Data", "Please enter valid Instructor email", "OK");
                 return;
             }
 

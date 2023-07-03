@@ -16,6 +16,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -37,11 +38,15 @@
                     </Picker.Items>
                 </Picker>
 
-                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Due Date: :</Label>
-                <DatePicker Grid.Row="3" Grid.Column="1" x:Name="DueDatePicker"></DatePicker>
 
-                <Label Grid.Row="4" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Alert On?</Label>
-                <Switch Grid.Row="4" Grid.Column="1" x:Name="AlertOn" HorizontalOptions="CenterAndExpand" IsToggled="False"/>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Start Date:</Label>
+                <DatePicker Grid.Row="3" Grid.Column="1" x:Name="StartDatePicker"></DatePicker>
+                
+                <Label Grid.Row="4" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Due Date:</Label>
+                <DatePicker Grid.Row="4" Grid.Column="1" x:Name="DueDatePicker"></DatePicker>
+
+                <Label Grid.Row="5" Grid.Column="0" FontSize="Medium" VerticalTextAlignment="Center">Alert On?</Label>
+                <Switch Grid.Row="5" Grid.Column="1" x:Name="AlertOn" HorizontalOptions="CenterAndExpand" IsToggled="False"/>
  
             </Grid>
 

@@ -177,7 +177,7 @@ namespace TermPlanner.Services
         /*DATABASES SERVICES FOR ASSESSMENTS*/
 
         #region ASSESSMENT DATABASE SERVICES
-        public static async Task AddAssessment(int courseId, string name, string type, DateTime dueDate, bool alertOn)
+        public static async Task AddAssessment(int courseId, string name, string type, DateTime startDate, DateTime dueDate, bool alertOn)
         {
             await Init();
 
@@ -186,6 +186,7 @@ namespace TermPlanner.Services
                 CourseId = courseId,
                 Name = name,
                 Type = type,
+                StartDate = startDate,
                 DueDate = dueDate,
                 AlertOn = alertOn
                 
@@ -195,7 +196,7 @@ namespace TermPlanner.Services
             int id = assessment.Id;
         }
 
-        public static async Task UpdateAssessment(int assessmentId, string name, string type, DateTime dueDate, bool alertOn)
+        public static async Task UpdateAssessment(int assessmentId, string name, string type, DateTime startDate, DateTime dueDate, bool alertOn)
         {
             await Init();
 
@@ -205,6 +206,7 @@ namespace TermPlanner.Services
             {
                 assessQuery.Name = name;
                 assessQuery.Type = type;
+                assessQuery.StartDate = startDate;
                 assessQuery.DueDate = dueDate;
                 assessQuery.AlertOn = alertOn;
 
@@ -276,6 +278,7 @@ namespace TermPlanner.Services
                 CourseId = sampleCourse1.Id,
                 Name = "Intro to Humanities OA",
                 Type = "Objective",
+                StartDate = DateTime.Today.Date,
                 DueDate = DateTime.Today.Date.AddDays(10),
                 AlertOn = true
             };
@@ -287,6 +290,7 @@ namespace TermPlanner.Services
                 CourseId = sampleCourse1.Id,
                 Name = "Intro to Humanities PA",
                 Type = "Performance",
+                StartDate = DateTime.Today.Date,
                 DueDate = DateTime.Today.Date.AddDays(14),
                 AlertOn = true
             };

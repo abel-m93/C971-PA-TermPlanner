@@ -47,6 +47,12 @@ namespace TermPlanner.Views
                         CrossLocalNotifications.Current.Show("Alert", $"{course.Name} starts today!", notificationId);
                         notificationId++;
                     }
+
+                    if (course.EndDate == DateTime.Today)
+                    {
+                        CrossLocalNotifications.Current.Show("Alert", $"{course.Name} ends today!", notificationId);
+                        notificationId++;
+                    }
                 }
             }
 
@@ -54,6 +60,11 @@ namespace TermPlanner.Views
             {
                 if (assessment.AlertOn == true)
                 {
+                    if(assessment.StartDate == DateTime.Today)
+                    {
+                        CrossLocalNotifications.Current.Show("Alert", $"{assessment.Name} Starts today!", notificationId);
+                        notificationId++;
+                    }
                     if (assessment.DueDate == DateTime.Today)
                     {
                         CrossLocalNotifications.Current.Show("Alert", $"{assessment.Name} Due today!", notificationId);

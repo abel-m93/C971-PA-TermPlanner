@@ -14,6 +14,7 @@ namespace TermPlanner.Views
     public partial class EditAssessment : ContentPage
     {
         private readonly int SelectedAssessmentId;
+        private readonly int SelectedCourseId;
         public EditAssessment()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace TermPlanner.Views
             InitializeComponent();
 
             SelectedAssessmentId = assessment.Id;
+            SelectedCourseId = assessment.CourseId;
 
             //POPULATE FORM FIELDS WITH DATA PASSED FROM ASSESSMENT PARAMETER IN CONSTRUCTOR
             AssessmentId.Text = assessment.Id.ToString();
@@ -53,6 +55,8 @@ namespace TermPlanner.Views
 
         async void SaveAssessment_Clicked(object sender, EventArgs e)
         {
+            var existingAssessments = DatabaseServices.GetAssessments(SelectedCourseId);
+            bool typeExists = false;
             if (string.IsNullOrWhiteSpace(AssessmentName.Text))
             {
                 await DisplayAlert("Missing Name", "Please enter a name", "OK");
@@ -65,10 +69,34 @@ namespace TermPlanner.Views
                 return;
             }
 
-            await DatabaseServices.UpdateAssessment(SelectedAssessmentId, AssessmentName.Text, AssessmentTypePicker.SelectedItem.ToString(),
-                               DueDatePicker.Date, AlertOn.IsToggled);
-            await DisplayAlert("Button Test", "Term Updated Successfully!", "OK");
-            await Navigation.PopAsync();
+            if (StartDatePicker.Date >= DueDatePicker.Date)
+            {
+                await DisplayAlert("Invalid Date", "Please ensure Start Date is before Due Date", "OK");
+                return;
+            }
+
+            foreach (Assessment assessment in await existingAssessments)
+            {
+                if (assessment.Id.ToString() != AssessmentId.Text && assessment.Type == AssessmentTypePicker.SelectedItem.ToString())
+                {
+                    typeExists = true;
+                }
+               
+            }
+
+            if (typeExists)
+            {
+                await DisplayAlert("Invalid Data", $"An assessment of type: {AssessmentTypePicker.SelectedItem} already exists", "OK");
+                return;            
+            }
+            else
+            {
+                await DatabaseServices.UpdateAssessment(SelectedAssessmentId, AssessmentName.Text, AssessmentTypePicker.SelectedItem.ToString(),
+                                            StartDatePicker.Date, DueDatePicker.Date, AlertOn.IsToggled);
+                await DisplayAlert("Button Test", "Assessment Updated Successfully!", "OK");
+                await Navigation.PopAsync();
+            }
         }
+
     }
 }
